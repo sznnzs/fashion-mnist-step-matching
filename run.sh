@@ -3,6 +3,21 @@
 #SBATCH --mem=8G
 #SBATCH --time=00:50:00
 set -euo pipefail
+case "${1:-}" in
+    ""|-h|--help)
+        cat <<'USAGE'
+Usage: bash run.sh all
+       bash run.sh STAGE [arguments]
+
+all           Download Fashion-MNIST and run the complete study in replication/.
+Stages        check, tune, select, main, native, probe, early, step-matching
+
+Set STUDY_PYTHON to choose the training interpreter and STUDY_RESULTS to
+choose the output directory. See README.md for GPU setup and Slurm submission.
+USAGE
+        exit 0
+        ;;
+esac
 cd "${SLURM_SUBMIT_DIR:-$(dirname "$0")}"
 export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 CUBLAS_WORKSPACE_CONFIG=:4096:8
 runner="${STUDY_PYTHON:-python}"

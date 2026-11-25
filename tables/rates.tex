@@ -1,0 +1,16 @@
+\begin{tabular}{@{}lr l rrrr@{}}
+\toprule
+ & & & \multicolumn{4}{c}{Validation cross-entropy} \\
+\cmidrule(lr){4-7}
+Method & Batch & Candidate rates (ascending) & $\eta_1$ & $\eta_2$ & $\eta_3$ & $\eta_4$ \\
+\midrule
+SGD & 64 & 0.01, 0.03, 0.1, 0.3 & 0.409 & 0.357 & \textbf{0.325} & 0.339 \\
+ & 256 &  & 0.507 & 0.427 & 0.363 & \textbf{0.329} \\
+\addlinespace[2pt]
+Momentum & 64 & 0.003, 0.01, 0.03, 0.1 & 0.371 & \textbf{0.354} & 0.370 & 0.779 \\
+ & 256 &  & 0.430 & 0.372 & \textbf{0.337} & 0.411 \\
+\addlinespace[2pt]
+Adam & 64 & 0.0003, 0.001, 0.003, 0.01 & 0.354 & \textbf{0.344} & 0.360 & 0.453 \\
+ & 256 &  & 0.380 & \textbf{0.337} & 0.343 & 0.428 \\
+\bottomrule
+\end{tabular}

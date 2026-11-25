@@ -1,0 +1,13 @@
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+ & \multicolumn{2}{c}{Images to target} & \multicolumn{2}{c}{15-epoch time} & \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+Rule & Stream & With fitting & Total (s) & Fit (ms) & Val. CE \\
+\midrule
+Noise matched & 24,576 & 24,576 & 1.13 & 0 & 0.321 \\
+Grid selected & 24,576 & 24,576 & 1.13 & 0 & 0.320 \\
+Linear & 34,816 & 34,816 & 1.13 & 0 & 0.339 \\
+Fit once & 26,624 & 34,816 & 1.17 & 31 & 0.323 \\
+Refit twice & 26,624 & 34,816 & 1.22 & 91 & 0.320 \\
+\bottomrule
+\end{tabular}

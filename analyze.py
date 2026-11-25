@@ -249,7 +249,8 @@ def figures(rows, histories):
     ax.legend(loc="lower center",bbox_to_anchor=(.54,1.01),ncol=2,frameon=False,
               handletextpad=.45,columnspacing=2)
     fig.subplots_adjust(left=.246,right=.982,bottom=.199,top=.847)
-    fig.savefig(FIG/"target.pdf",bbox_inches="tight",pad_inches=.04)
+    fig.savefig(FIG/"target.pdf", bbox_inches="tight", pad_inches=.04,
+                metadata={"CreationDate": None})
     plt.close(fig)
 
     fig, axes = plt.subplots(3,2,figsize=(5.65,4.0),sharey=True,sharex="col")
@@ -287,7 +288,8 @@ def figures(rows, histories):
     fig.legend(handles=handles,loc="upper center",bbox_to_anchor=(.55,1),ncol=2,frameon=False)
     fig.supylabel("Full-training cross-entropy",x=.015,fontsize=9)
     fig.subplots_adjust(left=.119,right=.985,bottom=.115,top=.86,wspace=.14,hspace=.21)
-    fig.savefig(FIG/"convergence.pdf",bbox_inches="tight",pad_inches=.03)
+    fig.savefig(FIG/"convergence.pdf", bbox_inches="tight", pad_inches=.03,
+                metadata={"CreationDate": None})
     plt.close(fig)
 
 

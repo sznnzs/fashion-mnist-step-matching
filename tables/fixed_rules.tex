@@ -1,0 +1,11 @@
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+Rule & Batch & $\eta$ & Step MSE ratio & Images to target & Val. CE \\
+\midrule
+Small-batch reference & 64 & 0.1000 & 1.00 & 12,288 & 0.352 \\
+Unchanged & 256 & 0.1000 & 0.25 & 38,912 & 0.325 \\
+Noise matched & 256 & 0.2004 & 1.00 & 24,576 & 0.321 \\
+Grid selected & 256 & 0.3000 & 2.24 & 24,576 & 0.320 \\
+Linear & 256 & 0.4000 & 3.99 & 34,816 & 0.339 \\
+\bottomrule
+\end{tabular}

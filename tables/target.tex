@@ -1,0 +1,14 @@
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+Method & Batch & Images & Updates & Time (ms) & Seed range (ms) \\
+\midrule
+SGD & 64 & 14,336 & 224 & 77.4 & 77.3--88.4 \\
+ & 256 & 26,624 & 104 & 37.4 & 34.5--46.0 \\
+\addlinespace[2pt]
+Momentum & 64 & 14,336 & 224 & 83.8 & 72.2--96.6 \\
+ & 256 & 20,480 & 80 & 31.3 & 25.0--31.3 \\
+\addlinespace[2pt]
+Adam & 64 & 10,240 & 160 & 72.3 & 72.2--85.8 \\
+ & 256 & 20,480 & 80 & 37.2 & 29.6--37.4 \\
+\bottomrule
+\end{tabular}

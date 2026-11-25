@@ -144,7 +144,8 @@ def figures(by_rule, checkpoints, directory):
         ax.margins(x=.10,y=.12)
     axes[0].set_ylabel("Validation cross-entropy")
     fig.subplots_adjust(left=.125,right=.985,top=.86,bottom=.255,wspace=.16)
-    fig.savefig(directory/"rate_response.pdf",bbox_inches="tight",pad_inches=.04)
+    fig.savefig(directory/"rate_response.pdf", bbox_inches="tight", pad_inches=.04,
+                metadata={"CreationDate": None})
     plt.close(fig)
 
     rows = [r for r in checkpoints if r["rule"] == "refresh"]
@@ -169,7 +170,9 @@ def figures(by_rule, checkpoints, directory):
     axes[1].legend(loc="upper center",bbox_to_anchor=(.43,-.22),frameon=False,ncol=3,
                    fontsize=7.8,handlelength=1.4,columnspacing=.85,handletextpad=.3)
     fig.subplots_adjust(left=.12,right=.98,top=.86,bottom=.23,wspace=.39)
-    fig.savefig(directory/"calibration.pdf",bbox_inches="tight",pad_inches=.04)
+    fig.savefig(directory/"calibration.pdf", bbox_inches="tight", pad_inches=.04,
+                metadata={"CreationDate": None})
+    fig.savefig(directory/"calibration.png", bbox_inches="tight", pad_inches=.04, dpi=200)
     plt.close(fig)
 
 

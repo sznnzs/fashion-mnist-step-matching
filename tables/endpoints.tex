@@ -1,0 +1,16 @@
+\begin{tabular}{@{}lrrrrrr@{}}
+\toprule
+ & & & \multicolumn{2}{c}{Test accuracy (\%)} & \multicolumn{2}{c}{Training cost} \\
+\cmidrule(lr){4-5}\cmidrule(lr){6-7}
+Method & Batch & Train CE & Median & Seed range & Total (s) & ms/update \\
+\midrule
+SGD & 64 & 0.177 & 88.05 & 87.73--88.41 & 4.64 & 0.366 \\
+ & 256 & 0.187 & 88.38 & 88.32--88.39 & 1.17 & 0.369 \\
+\addlinespace[2pt]
+Momentum & 64 & 0.186 & 88.00 & 87.51--88.28 & 5.14 & 0.406 \\
+ & 256 & 0.185 & 88.18 & 88.16--88.48 & 1.29 & 0.407 \\
+\addlinespace[2pt]
+Adam & 64 & 0.171 & 88.13 & 87.58--88.38 & 6.27 & 0.495 \\
+ & 256 & 0.192 & 88.24 & 88.14--88.38 & 1.58 & 0.498 \\
+\bottomrule
+\end{tabular}

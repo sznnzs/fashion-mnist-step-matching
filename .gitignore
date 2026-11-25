@@ -4,8 +4,11 @@ __pycache__/
 /data/
 /logs/
 /replication/
-/figures/
-/tables/
+/figures/*
+!/figures/*.pdf
+!/figures/calibration.png
+/tables/*
+!/tables/*.tex
 /results/early/
 /results/slurm_jobs.psv
 
