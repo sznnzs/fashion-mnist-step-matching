@@ -1,0 +1,19 @@
+__pycache__/
+*.py[cod]
+/build/
+/data/
+/logs/
+/replication/
+/figures/
+/tables/
+/results/early/
+/results/slurm_jobs.psv
+
+# The public repository contains the experiment code and measurements.
+/*.zip
+/*.pdf
+/report.tex
+/references.tex
+/neurips_2025.sty
+/make_report.py
+/requirements-report.txt

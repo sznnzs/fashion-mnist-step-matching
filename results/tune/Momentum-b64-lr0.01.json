@@ -1,0 +1,123 @@
+{
+  "stage": "tune",
+  "method": "Momentum",
+  "seed": 101,
+  "batch": 64,
+  "rate": 0.01,
+  "history": [
+    {
+      "epoch": 0,
+      "examples": 0,
+      "updates": 0,
+      "train_s": 0.0,
+      "eval_s": 0.004138906951993704,
+      "train": {
+        "loss": 2.320611104223463,
+        "accuracy": 0.13061111111111112
+      },
+      "valid": {
+        "loss": 2.3203493320941924,
+        "accuracy": 0.12816666666666668
+      }
+    },
+    {
+      "epoch": 1,
+      "examples": 54000,
+      "updates": 844,
+      "train_s": 0.3195589375682175,
+      "eval_s": 0.00828196294605732,
+      "train": {
+        "loss": 0.38818400769481537,
+        "accuracy": 0.8606666666666667
+      },
+      "valid": {
+        "loss": 0.4127314971073445,
+        "accuracy": 0.852
+      }
+    },
+    {
+      "epoch": 2,
+      "examples": 108000,
+      "updates": 1688,
+      "train_s": 0.6397730647586286,
+      "eval_s": 0.012622779235243797,
+      "train": {
+        "loss": 0.32616585621408106,
+        "accuracy": 0.8827037037037037
+      },
+      "valid": {
+        "loss": 0.356587893058527,
+        "accuracy": 0.8773333333333333
+      }
+    },
+    {
+      "epoch": 3,
+      "examples": 162000,
+      "updates": 2532,
+      "train_s": 0.9601271119900048,
+      "eval_s": 0.01690435502678156,
+      "train": {
+        "loss": 0.32815649175758316,
+        "accuracy": 0.8781111111111111
+      },
+      "valid": {
+        "loss": 0.3676273643611289,
+        "accuracy": 0.8678333333333333
+      }
+    },
+    {
+      "epoch": 4,
+      "examples": 216000,
+      "updates": 3376,
+      "train_s": 1.2785259308293462,
+      "eval_s": 0.021015180740505457,
+      "train": {
+        "loss": 0.2886188835633638,
+        "accuracy": 0.8944814814814814
+      },
+      "valid": {
+        "loss": 0.35213936524578116,
+        "accuracy": 0.8715
+      }
+    },
+    {
+      "epoch": 5,
+      "examples": 270000,
+      "updates": 4220,
+      "train_s": 1.5975478496402502,
+      "eval_s": 0.025177807081490755,
+      "train": {
+        "loss": 0.2751751859154263,
+        "accuracy": 0.9008148148148148
+      },
+      "valid": {
+        "loss": 0.35396911311991197,
+        "accuracy": 0.8735
+      }
+    }
+  ],
+  "environment": {
+    "torch": "2.9.1+cu128",
+    "numpy": "2.5.5",
+    "python": "3.12.3",
+    "cuda_build": "12.8",
+    "device": "cuda",
+    "job_id": "404",
+    "cpu_threads": 1,
+    "code_sha256": "c9b9a9167cf09f8b2520c8c7a32102cd9f25bd7417b81b1c58ff7096dea85e60",
+    "gpu": "NVIDIA RTX PRO 5000 72GB Blackwell",
+    "gpu_key": "89a0705170",
+    "vram_bytes": 76368510976,
+    "compute_capability": [
+      12,
+      0
+    ]
+  },
+  "split": {
+    "split_seed": 6704,
+    "train_indices_sha256": "2ccaebe66168a33fbebd3f402249560db0a0ffb476a12a8e00a8aca9a6dd63f0",
+    "valid_indices_sha256": "decfbed5f189987bc437c518edae4bbe1812fd8585ce661c00115c919db44b92",
+    "train_pixel_mean": 72.88930633503401,
+    "train_pixel_std": 89.99101494846192
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "steps": 23,
+  "max_abs_error": {
+    "SGD": 0.0,
+    "Momentum": 0.0,
+    "Adam": 2.220446049250313e-16
+  },
+  "torch": "2.9.1+cu128"
+}

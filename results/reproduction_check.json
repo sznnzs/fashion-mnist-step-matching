@@ -1,0 +1,25 @@
+{
+  "selected_rates_match": true,
+  "reference_epochs_checked": 528,
+  "test_endpoints_checked": 24,
+  "max_abs_loss_diff": 0.0,
+  "max_abs_accuracy_diff": 0.0,
+  "dense_losses_checked": 2520,
+  "max_abs_dense_loss_diff": 0.0,
+  "gradient_errors_checked": 1536,
+  "max_abs_gradient_error_diff": 0.0,
+  "fresh_slurm_jobs": [
+    "415"
+  ],
+  "fresh_pairs_faster_at_256": 9,
+  "fresh_pairs_total": 9,
+  "fresh_paired_t50_ratio_range": [
+    1.675535698903798,
+    3.3685879414088324
+  ],
+  "transfer_runs_checked": 35,
+  "transfer_checkpoints_checked": 560,
+  "max_abs_transfer_metric_diff": 0.0,
+  "calibration_fits_checked": 20,
+  "max_abs_calibration_moment_diff": 0.0
+}
