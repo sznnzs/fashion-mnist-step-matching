@@ -253,7 +253,7 @@ def figures(rows, histories):
                 metadata={"CreationDate": None})
     plt.close(fig)
 
-    fig, axes = plt.subplots(3,2,figsize=(5.65,4.0),sharey=True,sharex="col")
+    fig, axes = plt.subplots(3, 2, figsize=(5.65, 4.2), sharey=True, sharex="col")
     longest_run = max(h[-1]["train_s"] for h in histories.values())
     palette = {64:"#205e85",256:"#af4f22"}
     for i,m in enumerate(METHODS):
@@ -285,10 +285,12 @@ def figures(rows, histories):
     axes[2,0].set_xlabel("Images seen (millions)")
     axes[2,1].set_xlabel("Cumulative training time (s)")
     handles=[Line2D([],[],color=palette[b],lw=1.8,ls=s,label=f"Batch {b}") for b,s in [(64,"-"),(256,"--")]]
-    fig.legend(handles=handles,loc="upper center",bbox_to_anchor=(.55,1),ncol=2,frameon=False)
-    fig.supylabel("Full-training cross-entropy",x=.015,fontsize=9)
-    fig.subplots_adjust(left=.119,right=.985,bottom=.115,top=.86,wspace=.14,hspace=.21)
-    fig.savefig(FIG/"convergence.pdf", bbox_inches="tight", pad_inches=.03,
+    # Keep the shared legend inside the PDF canvas, above the column titles.
+    fig.subplots_adjust(left=.13, right=.976, bottom=.128, top=.826, wspace=.14, hspace=.21)
+    fig.legend(handles=handles, loc="upper center", bbox_to_anchor=(.553, .965),
+               ncol=2, frameon=False, borderaxespad=0)
+    fig.supylabel("Full-training cross-entropy", x=.026, fontsize=9)
+    fig.savefig(FIG/"convergence.pdf", bbox_inches=fig.bbox_inches,
                 metadata={"CreationDate": None})
     plt.close(fig)
 
