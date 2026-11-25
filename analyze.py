@@ -183,7 +183,7 @@ def result_tables(rows, tuning):
           "Total (s)","ms/update"],endpoints,
           [r" & & & \multicolumn{2}{c}{Test accuracy (\%)} & \multicolumn{2}{c}{Training cost} \\",
            r"\cmidrule(lr){4-5}\cmidrule(lr){6-7}"])
-    table("sensitivity","@{}lrrrrr@{}",["Method",r"$L\leq.50$","Seed range",r"$L\leq.30$","15 epochs","Native$^{*}$"],sensitivity)
+    table("sensitivity","@{}lrrrrr@{}",["Method",r"$L\leq.50$","Seed range",r"$L\leq.30$","15 epochs","Fused$^{*}$"],sensitivity)
     probes = load(RESULTS/"probe.json")
     pr = []
     for p in probes["rows"]:

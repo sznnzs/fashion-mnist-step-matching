@@ -66,13 +66,19 @@ def measurements(results):
                 au, cu, du = am.sum(axis=0)
                 assert math.isclose(fit["rate"], max(0,c/a), rel_tol=1e-12)
                 floor_rate = max(0, cu/au)
+                # Each displacement component perpendicular to its block gradient
+                # remains unchanged at every learning rate.
+                grad_sq, grad_dot_step, step_sq = am.T
+                perpendicular_sq = np.maximum(0.0, step_sq - grad_dot_step**2 / grad_sq)
                 checkpoints.append({
                     "rule":rule, "seed":seed, "after_epoch":fit["after_epoch"], "rate":fit["rate"],
                     "fit_error":relative_error(fm,fit["rate"]), "audit_error":relative_error(am,fit["rate"]),
                     "linear_error":relative_error(am,4*data["base_rate"]),
                     "noise_error":relative_error(am,data["noise_rate"]),
                     "grid_error":relative_error(am,data["tuned_rate"]),
-                    "audit_floor":relative_error(am,floor_rate), "fit_ms":1000*fit["fit_s"],
+                    "audit_floor":relative_error(am,floor_rate),
+                    "audit_direction_floor":math.sqrt(perpendicular_sq.sum() / du),
+                    "fit_ms":1000*fit["fit_s"],
                 })
             hit = data["target_hit"]
             if hit is not None:

@@ -45,6 +45,8 @@ python verify_replication.py replication
 - **Optimizer comparison.** Each optimizer and batch size gets four candidate learning rates and five tuning epochs on seed 101. Formal runs share initialization and image order within each of seeds 7, 19 and 43 and train for 15 epochs. The first epoch is replayed five times with the training loss checked every 2,048 images. Timing covers batch indexing and forward, backward and update operations on GPU-resident data.
 - **Step matching.** Five new seeds (131, 137, 149, 151 and 157) compare seven SGD policies. A fit uses 16 training blocks of 256 images. A further 16 disjoint blocks measure the relative displacement error. The cost of fitting enters the training budget. The once-fitted rate and the policy that refits after epochs 1 and 5 share their initial fit.
 
+In the [calibration records](results/calibration_summary.csv), `audit_error` uses the fitted rate, `audit_floor` uses the best common rate on the held-out blocks, and `audit_direction_floor` measures the displacement component perpendicular to each block's gradient. The squared ratio `(audit_direction_floor / audit_error) ** 2` gives the share of fitted squared error due to direction. Use the 15 rows marked `refresh` for the five-seed, three-checkpoint comparison.
+
 ## Code and records
 
 | Component | Implementation | Records |
