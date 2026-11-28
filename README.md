@@ -1,5 +1,3 @@
-<a name="readme-top"></a>
-
 <div align="center">
   <h1>Can One Large-Batch Step Match Four Small Steps?</h1>
   <h3>Training Efficiency on Fashion-MNIST</h3>
@@ -22,11 +20,11 @@
 
 ## 📖 Abstract
 
-One stochastic gradient descent (SGD) update on 256 images uses the same examples as four updates on batches of 64, but the small steps evaluate gradients at successively updated weights. This study asks how much of their net displacement a single learning rate can recover. On Fashion-MNIST, a least-squares fit reduces held-out relative displacement error by a median **28.3%** over linear scaling, while most residual squared error lies perpendicular to the large-batch gradient. Refitted and grid-selected SGD both finish at median validation cross-entropy **0.320** after 15 epochs, with additional calibration work for refitting. A paired comparison of SGD, momentum SGD and Adam also finds that batch 64 needs fewer images to reach a common training loss, whereas batch 256 reaches it sooner on the GPU. Together, these experiments distinguish local step agreement, data use and training time.
+One stochastic gradient descent (SGD) update on 256 images uses the same examples as four updates on batches of 64, but the small steps evaluate gradients at successively updated weights. This study asks how much of their net displacement a single learning rate can recover. On Fashion-MNIST, a least-squares fit reduces held-out relative displacement error by a median **28.3%** over linear scaling, while most residual squared error lies perpendicular to the large-batch gradient. Refitted and grid-selected SGD both finish at median validation cross-entropy **0.320** after 15 epochs, with additional calibration work for refitting. A paired comparison of SGD, momentum SGD and Adam also finds that batch 64 needs fewer images to reach a common training loss, whereas batch 256 reaches it sooner on the GPU.
 
 <div align="center">
   <img src="./assets/step_matching_overview.svg" alt="Schematic: compare four small updates with one large update, fit a shared learning rate on 16 blocks, and evaluate displacement agreement and training cost." width="100%">
-  <p><em>Step matching: compare updates on the same images, fit a common rate, and measure both local agreement and training outcomes. The paths are schematic.</em></p>
+  <p><em>Step-matching overview: compare local updates, fit a common rate and evaluate training outcomes.</em></p>
 </div>
 
 <a name="method"></a>
@@ -64,7 +62,7 @@ The fitted rate improves on linear scaling at **all 15 seed–checkpoint pairs**
 
 ### Training quality and cost
 
-The local improvement does not consistently lower final validation loss relative to grid selection. Both policies have a median validation cross-entropy (CE) that rounds to **0.320**, while refitting adds calibration work.
+Refitted and grid-selected SGD both reach a median validation cross-entropy (CE) that rounds to **0.320**, while refitting adds calibration work.
 
 | Policy | Batch | Validation CE ↓ | Gradient work to target ↓ | Training + fitting (s) ↓ |
 | --- | ---: | ---: | ---: | ---: |
@@ -76,7 +74,7 @@ The local improvement does not consistently lower final validation loss relative
 | Fit once | 256 | 0.323 | 34,816 | 1.17 |
 | Refit twice | 256 | **0.320** | 34,816 | 1.22 |
 
-All values are medians over five paired seeds. Validation CE and time are measured after 15 epochs. **Gradient work to target** counts image-gradient evaluations needed to reach full-training CE ≤ 0.50, including fitting. For the fitted policies, this is 26,624 training images plus 8,192 calibration evaluations. Time includes training and fitting, excluding full-dataset evaluation and the displacement audit. These per-run costs exclude the initial learning-rate grid search. [Per-run results](results/step_summary.csv)
+Five-seed medians. Validation CE and time are measured after 15 epochs. **Gradient work to target** counts image-gradient evaluations needed to reach full-training CE ≤ 0.50, including fitting. Time covers training and fitting; full-dataset evaluation, the displacement audit and the initial learning-rate grid search are excluded. [Per-run results](results/step_summary.csv)
 
 ### Batch size and optimizer efficiency
 
@@ -89,8 +87,6 @@ Across all three optimizers, batch 64 reaches the training target with fewer ima
 | Adam | 10,240 | 20,480 | 2.29× |
 
 Image counts are medians across three seeds. Speedup is the median of the paired ratios `T64 / T256`. GPU time covers updates with data already on the device and excludes warm-up, data loading and full-dataset evaluation. [Paired measurements](results/paired_summary.json) · [Loss curves](figures/convergence.pdf) · [Time and image comparison](figures/target.pdf)
-
-These results cover one dataset, a small network and three or five paired seeds per comparison. The measured speedups depend on the GPU and timing procedure.
 
 <details>
 <summary><strong>Experimental protocol and learning-rate policies</strong></summary>
@@ -127,8 +123,8 @@ The first observed full-training CE at or below 0.50 is recorded on a grid of 2,
 In [calibration_summary.csv](results/calibration_summary.csv), the 15 rows with `rule=refresh` provide the five-seed, three-checkpoint comparison.
 
 - `audit_error` is the pooled relative displacement error on blocks held out from fitting; `linear_error` uses linear scaling on the same blocks and weights.
-- `1 - audit_error / linear_error` gives the relative error reduction for one seed–checkpoint pair. Its median is 28.3%.
-- `(audit_direction_floor / audit_error) ** 2` gives the share of residual squared error from perpendicular displacement. Its median is 94.9%.
+- `1 - audit_error / linear_error` gives the relative error reduction for one seed–checkpoint pair.
+- `(audit_direction_floor / audit_error) ** 2` gives the share of residual squared error from perpendicular displacement.
 
 </details>
 
@@ -145,23 +141,23 @@ python -m pip install -r requirements.txt
 python analyze.py
 ```
 
-This checks the archived experiment records and regenerates **four vector figures, the calibration PNG and seven tables** in [figures/](figures) and [tables/](tables). It runs on a CPU and, once NumPy and Matplotlib are installed, works offline without downloading the dataset.
+Rebuilds **four vector figures, the calibration PNG and seven tables** from saved measurements on a CPU. Outputs: [figures/](figures) and [tables/](tables).
 
 ### Repeat the training on a GPU
 
-Use the same clone and dependencies above. The recorded environment was **Python 3.12.3, NumPy 2.5.5, PyTorch 2.9.1 with CUDA 12.8**, on an **NVIDIA RTX PRO 5000 72GB Blackwell** GPU. For the recorded PyTorch/CUDA combination, install PyTorch and run the study in an existing GPU allocation:
+Recorded environment: **Python 3.12.3, NumPy 2.5.5, [PyTorch 2.9.1 with CUDA 12.8](https://pytorch.org/get-started/previous-versions/)** and an **NVIDIA RTX PRO 5000 72GB Blackwell** GPU. Run in an existing GPU allocation:
 
 ```bash
 python -m pip install torch==2.9.1 --index-url https://download.pytorch.org/whl/cu128
 STUDY_PYTHON=python bash run.sh all
 ```
 
-See the [PyTorch installation guide](https://pytorch.org/get-started/previous-versions/) for other CUDA builds. The [launcher](run.sh) uses one GPU, downloads Fashion-MNIST to `data/`, verifies its published checksums and writes new measurements to `replication/` by default. Archived measurements are in `results/`.
+The [launcher](run.sh) downloads and verifies Fashion-MNIST in `data/` and writes new measurements to `replication/`.
 
 <details>
 <summary><strong>Submit through Slurm on the course cluster</strong></summary>
 
-From the repository root, use this submission command in place of running the launcher directly:
+From the repository root:
 
 ```bash
 mkdir -p logs
@@ -181,7 +177,7 @@ STUDY_RESULTS="$PWD/replication" python analyze.py
 python verify_replication.py replication --output replication/reproduction_check.json
 ```
 
-New figures and tables appear in `replication/report_assets/`. The [verifier](verify_replication.py) checks the run configuration and reports the largest numerical differences and measured timing ratios. Its report is printed and saved to `replication/reproduction_check.json`. An earlier [independent GPU replication](results/reproduction_check.json) is included with the archived results.
+Figures and tables are written to `replication/report_assets/`; numerical differences and timing ratios are saved to `replication/reproduction_check.json`. [Recorded comparison](results/reproduction_check.json)
 
 <a name="repository"></a>
 
@@ -194,6 +190,4 @@ New figures and tables appear in `replication/report_assets/`. The [verifier](ve
 | Measure gradient noise at identical weights | [probe.py](probe.py) | [Individual draws](results/probe.json) · [Estimates and exact values](tables/probe.tex) |
 | Match one large SGD step to four small steps | [step_matching.py](step_matching.py) · [matching_analysis.py](matching_analysis.py) | [Per-run records](results/step_matching) · [Fixed-rate controls](figures/rate_response.pdf) · [Held-out fit](figures/calibration.pdf) |
 
-[data_io.py](data_io.py) handles dataset download and splitting; [analyze.py](analyze.py) checks saved measurements and generates the quantitative figures and tables. The method schematic is an editable [SVG](assets/step_matching_overview.svg).
-
-<p align="right"><a href="#readme-top">Back to top ↑</a></p>
+Dataset loading: [data_io.py](data_io.py). Figure and table generation: [analyze.py](analyze.py).
