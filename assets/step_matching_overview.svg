@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="376" viewBox="0 0 1240 376" role="img" aria-labelledby="title desc">
+  <title id="title">Matching one large SGD step to four small steps</title>
+  <desc id="desc">A schematic compares four small-batch updates with one large-batch update from the same weights and images. Sixteen blocks fit a shared nonnegative learning rate. Sixteen separate blocks measure displacement error, while training runs measure validation loss, gradient work and time. The paths are illustrative, not measured trajectories.</desc>
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#205d7d"/>
+    </marker>
+    <marker id="arrow-orange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#b45a32"/>
+    </marker>
+    <marker id="arrow-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#7b8d99"/>
+    </marker>
+  </defs>
+  <rect width="1240" height="376" rx="14" fill="#ffffff"/>
+  <g font-family="DejaVu Sans, Arial, sans-serif" fill="#243b4a">
+    <g font-size="20" font-weight="600">
+      <text x="24" y="35">1  Compare update paths</text>
+      <text x="516" y="35">2  Fit a common rate</text>
+      <text x="840" y="35">3  Evaluate agreement and cost</text>
+    </g>
+    <g stroke="#dce5ea" stroke-width="1.5">
+      <rect x="24" y="58" width="468" height="286" rx="12" fill="#f8fafb"/>
+      <rect x="516" y="58" width="300" height="286" rx="12" fill="#f1f7fa"/>
+      <rect x="840" y="58" width="376" height="286" rx="12" fill="#f8fafb"/>
+    </g>
+
+    <text x="40" y="85" font-size="16">Same 256 images and initial weights</text>
+    <g fill="none" stroke="#b45a32" stroke-width="3" marker-end="url(#arrow-orange)">
+      <path d="M 66 228 L 145 204"/>
+      <path d="M 145 204 L 222 156"/>
+      <path d="M 222 156 L 316 136"/>
+      <path d="M 316 136 L 420 122"/>
+    </g>
+    <g fill="#b45a32">
+      <circle cx="145" cy="204" r="3.5"/>
+      <circle cx="222" cy="156" r="3.5"/>
+      <circle cx="316" cy="136" r="3.5"/>
+      <circle cx="420" cy="122" r="4.5"/>
+    </g>
+    <path d="M 66 228 H 420" fill="none" stroke="#205d7d" stroke-width="3.5" marker-end="url(#arrow-blue)"/>
+    <circle cx="66" cy="228" r="5" fill="#243b4a"/>
+    <text x="47" y="259" font-size="20">θ₀</text>
+    <text x="147" y="118" fill="#b45a32" font-size="17">Four updates · batch 64</text>
+    <text x="150" y="262" fill="#205d7d" font-size="17">One update · batch 256</text>
+    <path d="M 420 129 V 228" fill="none" stroke="#7b8d99" stroke-width="1.8" stroke-dasharray="5 5"/>
+    <path d="M 408 228 V 216 H 420" fill="none" stroke="#7b8d99" stroke-width="1.5"/>
+    <text x="284" y="190" fill="#627582" font-size="15">Directional gap</text>
+    <text x="40" y="313" font-size="15">Later small steps use updated weights.</text>
+
+    <text x="666" y="96" text-anchor="middle" font-size="17">16 disjoint fitting blocks</text>
+    <rect x="538" y="131" width="256" height="91" rx="9" fill="#ffffff" stroke="#a8c7d8" stroke-width="1.5"/>
+    <text x="666" y="165" text-anchor="middle" fill="#205d7d" font-size="20" font-weight="600">Least-squares rate</text>
+    <text x="666" y="192" text-anchor="middle" font-size="15">Minimize displacement error</text>
+    <path d="M 666 222 V 243" fill="none" stroke="#205d7d" stroke-width="2" marker-end="url(#arrow-blue)"/>
+    <text x="666" y="273" text-anchor="middle" fill="#205d7d" font-size="20">Shared rate η̂ ≥ 0</text>
+    <text x="666" y="313" text-anchor="middle" font-size="14">8,192 image-gradient evaluations</text>
+
+    <g fill="none" stroke="#7b8d99" stroke-width="1.8" marker-end="url(#arrow-gray)">
+      <path d="M 789 265 H 830 V 137 H 856"/>
+      <path d="M 830 265 H 856"/>
+    </g>
+    <g fill="#ffffff" stroke="#d1dde4" stroke-width="1.5">
+      <rect x="860" y="91" width="336" height="91" rx="9"/>
+      <rect x="860" y="225" width="336" height="91" rx="9"/>
+    </g>
+    <text x="1028" y="121" text-anchor="middle" font-size="19" font-weight="600">Local agreement</text>
+    <text x="1028" y="149" text-anchor="middle" font-size="16">16 held-out blocks</text>
+    <text x="1028" y="171" text-anchor="middle" font-size="15" fill="#627582">at the same weights</text>
+    <text x="1028" y="253" text-anchor="middle" font-size="19" font-weight="600">Training outcomes</text>
+    <text x="1028" y="279" text-anchor="middle" font-size="16">Validation loss and gradient work</text>
+    <text x="1028" y="302" text-anchor="middle" font-size="16">Training + fitting time</text>
+  </g>
+</svg>
