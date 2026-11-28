@@ -37,8 +37,8 @@ For each block of 256 training images, compute its gradient $g_b$ at the current
 
 $$
 \widehat{\eta}
-= \underset{\eta \geq 0}{\operatorname{argmin}}\;\sum_b \lVert d_b - \eta g_b \rVert_2^2
-= \max\!\left(0,\frac{\sum_b g_b^\top d_b}{\sum_b \lVert g_b\rVert_2^2}\right),
+= \underset{\eta \geq 0}{\arg\min} \sum_b \lVert d_b - \eta g_b \rVert_2^2
+= \max\left(0,\frac{\sum_b g_b^\top d_b}{\sum_b \lVert g_b\rVert_2^2}\right),
 $$
 
 when the denominator is positive. Only the fitted rate enters training; the four-step copies are used for calibration.
